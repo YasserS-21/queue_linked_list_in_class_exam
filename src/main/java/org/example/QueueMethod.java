@@ -19,19 +19,19 @@ public class QueueMethod {
     }
 
     public void addFruitToQueue(String fruit) {
-
+        fruitsQueue.add(fruit);
     }
 
     public String removeFruitFromQueue() {
-    
+        return fruitsQueue.remove();
     }
 
     public String peekAtHeadOfQueue() {
-        
+        return fruitsQueue.peek();
     }
 
     public int getQueueSize() {
-  
+        return fruitsQueue.size();
     }
 
 }

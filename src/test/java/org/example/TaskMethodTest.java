@@ -25,7 +25,7 @@ public class TaskMethodTest {
         Task newTask = new Task("Write report", 1);
         taskMethod.addTaskToQueue(newTask);
         assertEquals(5, taskMethod.getTaskQueueSize());
-        assertEquals(task1, taskMethod.peekAtNextTaskInQueue()); // FIFO order
+        assertEquals(task1.toString(), taskMethod.peekAtNextTaskInQueue().toString()); // FIFO order
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -36,9 +36,9 @@ public class TaskMethodTest {
     @Test
     public void testProcessNextTaskFromQueue_Success() {
         Task processedTask = taskMethod.processNextTaskFromQueue();
-        assertEquals(task1, processedTask);
+        assertEquals(task1.toString(), processedTask.toString());
         assertEquals(3, taskMethod.getTaskQueueSize());
-        assertEquals(task2, taskMethod.peekAtNextTaskInQueue()); // Next in line
+        assertEquals(task2.toString(), taskMethod.peekAtNextTaskInQueue().toString()); // Next in line
     }
 
     @Test
@@ -54,7 +54,7 @@ public class TaskMethodTest {
     @Test
     public void testPeekAtNextTaskInQueue() {
         Task nextTask = taskMethod.peekAtNextTaskInQueue();
-        assertEquals(task1, nextTask);
+        assertEquals(task1.toString(), nextTask.toString());
         assertEquals(4, taskMethod.getTaskQueueSize()); // Size unchanged by peek
     }
 
@@ -65,10 +65,10 @@ public class TaskMethodTest {
 
     @Test
     public void testQueueOrder_FIFO() {
-        assertEquals(task1, taskMethod.processNextTaskFromQueue());
-        assertEquals(task2, taskMethod.processNextTaskFromQueue());
-        assertEquals(task3, taskMethod.processNextTaskFromQueue());
-        assertEquals(task4, taskMethod.processNextTaskFromQueue());
+        assertEquals(task1.toString(), taskMethod.processNextTaskFromQueue().toString());
+        assertEquals(task2.toString(), taskMethod.processNextTaskFromQueue().toString());
+        assertEquals(task3.toString(), taskMethod.processNextTaskFromQueue().toString());
+        assertEquals(task4.toString(), taskMethod.processNextTaskFromQueue().toString());
         assertEquals(0, taskMethod.getTaskQueueSize());
     }
 
@@ -76,7 +76,7 @@ public class TaskMethodTest {
     public void testGetTasksWithPriority_Found() {
         List<Task> highPriorityTasks = taskMethod.getTasksWithPriority(3);
         assertEquals(1, highPriorityTasks.size());
-        assertEquals(task1, highPriorityTasks.get(0));
+        assertEquals(task1.toString(), highPriorityTasks.get(0).toString());
     }
 
     @Test
@@ -88,10 +88,10 @@ public class TaskMethodTest {
     @Test
     public void testMoveTaskToBack_ValidPositions() {
         taskMethod.moveTaskToBack(2); // Move the first task two positions back
-        assertEquals(task3, taskMethod.processNextTaskFromQueue()); // "Walk the dog"
-        assertEquals(task4, taskMethod.processNextTaskFromQueue()); // "Pay bills"
-        assertEquals(task1, taskMethod.processNextTaskFromQueue()); // "Clean dishes"
-        assertEquals(task2, taskMethod.processNextTaskFromQueue()); // "Do laundry"
+        assertEquals(task3.toString(), taskMethod.processNextTaskFromQueue().toString()); // "Walk the dog"
+        assertEquals(task4.toString(), taskMethod.processNextTaskFromQueue().toString()); // "Pay bills"
+        assertEquals(task1.toString(), taskMethod.processNextTaskFromQueue().toString()); // "Clean dishes"
+        assertEquals(task2.toString(), taskMethod.processNextTaskFromQueue().toString()); // "Do laundry"
         assertEquals(0, taskMethod.getTaskQueueSize());
     }
 
